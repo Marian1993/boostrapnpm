@@ -16,11 +16,11 @@ function compiladorSassPersonal() {
 }
 
 function copy() {
-  return gulp.src('./node_modules/**/bootstrap.bundle.min.js')
+  return gulp.src('./node_modules/bootstrap/dist/js/*')
     .pipe(gulp.dest('./js'));
 }
 
   exports.compila = compiladorSass;
   exports.compila2 = compiladorSassPersonal;
   exports.copy = copy;
-  exports.build = series(copy, compiladorSass);
+  exports.build = series(copy, compiladorSassPersonal);
