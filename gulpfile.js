@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
+const { series } = require('gulp');
 
 
 function compiladorSass() {
@@ -11,8 +12,15 @@ function compiladorSass() {
 function compiladorSassPersonal() {
   return gulp.src('./scss/custom.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./css/'));
+    .pipe(gulp.dest('./css'));
+}
+
+function copy() {
+  return gulp.src('./node_modules/**/bootstrap.bundle.min.js')
+    .pipe(gulp.dest('./js'));
 }
 
   exports.compila = compiladorSass;
   exports.compila2 = compiladorSassPersonal;
+  exports.copy = copy;
+  exports.build = series(copy, compiladorSass);
